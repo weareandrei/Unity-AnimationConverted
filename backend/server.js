@@ -12,18 +12,21 @@ app.use(cors()); // Cross-Origin Resource Sharing
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// Configure multer for handling file uploads
 const storage = multer.memoryStorage()
-const upload = multer({ dest: "uploads/" });
+const upload = multer({ storage: storage });
 
-// API endpoint to receive PSD/PSB files
-
-app.post("/psdToSpritesheet", upload.array("files"), uploadFiles);
+app.post("/psdToSpritesheet", upload.array("files"), uploadFiles)
 
 function uploadFiles(req, res) {
-    console.log(req.body);
-    console.log(req.files);
-    res.json({ message: "Successfully uploaded files" });
+    // Here, req.files will contain the uploaded files in memory
+    const processedFiles = req.files.map(file => ({
+        originalName: file.originalname,
+        buffer: file.buffer, // This contains the file data in memory
+        // You can add more processing here if needed
+    }))
+
+    // You can send the processed files back in the response
+    res.json({ files: processedFiles })
 }
 
 

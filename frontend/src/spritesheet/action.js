@@ -36,12 +36,14 @@ export const getSpritesheet = (formData) => {
             // }
         })
         .then((response) => {
+            console.log(response)
             const pngBlob = response.data
             const pngUrl = URL.createObjectURL(pngBlob)
             dispatch(getSpritesheetSuccess(pngUrl))
 
         })
         .catch((error) => {
+            console.log(error)
             dispatch(getSpritesheetFailure(error.message))
         })
     }
