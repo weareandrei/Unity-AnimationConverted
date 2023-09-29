@@ -20,7 +20,7 @@ class Dropzone extends React.Component {
         ))
 
         return (
-            <ReactDropzone onDrop={this.onDrop} accept={['.psd', '.psb']}>
+            <ReactDropzone onDrop={this.onDrop}/* accept={['.psd', '.psb']}*/>
                 {({ getRootProps, getInputProps }) => (
                     <section className="container">
                         <div {...getRootProps({ className: 'dropzone' })}>

@@ -43,8 +43,10 @@ class SpritesheetPage extends React.Component {
     renderDropZone = () =>
         <Dropzone onDropAction={this.getSpritesheet}/>
 
-    renderSpriteSheetImage = () =>
-        <img src={this.props.spriteSheets[0]} alt="Processed Image"/>
+    renderSpriteSheetImage = () => {
+        console.log('Displaying image : ', this.props.spriteSheets[0])
+        return <img src={this.props.spriteSheets[0]} alt="Processed Image"/>
+    }
 
     onDrop = (acceptedImages) => {
         if (this.imagesValid(acceptedImages)) {
@@ -74,7 +76,7 @@ class SpritesheetPage extends React.Component {
         console.log(files)
         const formData = new FormData();
         formData.append("name", 'Some Name');
-        for(let i =0; i < files.length; i++) {
+        for(let i = 0; i < files.length; i++) {
             formData.append("files", files[i]);
         }
 

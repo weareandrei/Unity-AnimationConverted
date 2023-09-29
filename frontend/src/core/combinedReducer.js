@@ -18,7 +18,7 @@ const persistConfig = {
     key: 'root',
     storage,
     // blacklist is for things that you don't want to be stored (persistent)
-    blacklist: ['checkout', 'application', 'form', 'navigation', 'order', 'checkoutForm', 'notification', 'featuredStore'],
+    blacklist: ['spreadsheet', 'application'],
 }
 
 const persistedReducer = persistReducer(persistConfig, rootReducer)
