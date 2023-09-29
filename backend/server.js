@@ -29,15 +29,14 @@ app.post('/psdToSpritesheet', upload.array('files'), async (req, res) => {
             })
         )
 
-        const image = processedFiles[0].buffer
-        console.log(processedFiles)
-        console.log(image)
+        const imagePSD = processedFiles[0].buffer
+        const imagePNG = await psd2png(imagePSD)
 
-        const sharpImage = await sharp(image)
-        await sharpImage.toFile(outputFilePath)
+        // const sharpImage = await sharp(image)
+        // await sharpImage.toFile(outputFilePath)
 
         res.type('image/png')
-            .send(image)
+            .send(imagePNG)
             // .json({ files: processedFiles });
     } catch (error) {
         console.error('Error processing files:', error);
