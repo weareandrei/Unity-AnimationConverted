@@ -1,7 +1,7 @@
 import {GET_SPRITESHEET, GET_SPRITESHEET_SUCCESS, GET_SPRITESHEET_FAILURE} from './action'
 
 const initialState = {
-    spriteSheetGenerated: {},
+    spriteSheetsGenerated: {},
     isLoading: false
 }
 
@@ -18,7 +18,7 @@ const spritesheetReducer = (state = initialState, action) => {
             return {
                 ...state,
                 isLoading: false,
-                spriteSheetGenerated: action.payload.pngUrl
+                spriteSheetsGenerated: action.payload.pngUrls
             }
         case GET_SPRITESHEET_FAILURE:
             console.log('GET_SPRITESHEET_FAILURE')

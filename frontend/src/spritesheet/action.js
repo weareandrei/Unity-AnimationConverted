@@ -1,4 +1,5 @@
 import axios from "axios"
+import map from "lodash/map";
 
 export {addNotification} from '../action'
 
@@ -10,10 +11,10 @@ const getSpritesheetRequest = ()  => ({
     type: GET_SPRITESHEET
 })
 
-const getSpritesheetSuccess = (pngUrl)  => ({
+const getSpritesheetSuccess = (pngUrls)  => ({
     type: GET_SPRITESHEET_SUCCESS,
     payload: {
-        pngUrl
+        pngUrls
     }
 })
 
@@ -36,12 +37,33 @@ export const getSpritesheet = (formData) => {
             // }
         })
         .then((response) => {
-            console.log(response)
-            const pngBlob = response.data
-            const pngUrl = URL.createObjectURL(pngBlob)
-            dispatch(getSpritesheetSuccess(pngUrl))
-
+            if (response.ok) {
+                return response.json()
+            } else {
+                throw new Error(`HTTP Error: ${response.status}`)
+            }
         })
+        .then((data) => {
+            // Assuming your response JSON contains the processed files in an array named 'files'
+            const processedFiles = data.files
+            console.log(processedFiles)
+
+            const imagesUrls = map(processedFiles, (file) => {
+                // Create a Blob object from the file buffer and create a URL for it
+                const blob = new Blob([file.buffer], { type: 'image/png' })
+                return URL.createObjectURL(blob)
+            })
+
+            console.log(imagesUrls)
+            dispatch(getSpritesheetSuccess(imagesUrls))
+        })
+        // .then((response) => {
+        //     console.log(response)
+        //     const pngBlob = response.data
+        //     const pngUrl = URL.createObjectURL(pngBlob)
+        //     dispatch(getSpritesheetSuccess(pngUrl))
+        //
+        // })
         .catch((error) => {
             console.log(error)
             dispatch(getSpritesheetFailure(error.message))

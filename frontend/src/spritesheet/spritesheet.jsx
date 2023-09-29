@@ -21,7 +21,7 @@ class SpritesheetPage extends React.Component {
     }
 
     static defaultProps = {
-        spriteSheet: null
+        spriteSheets: null
     }
 
     componentDidMount() {
@@ -36,7 +36,7 @@ class SpritesheetPage extends React.Component {
         <div className="SpritesheetPage">
             <h2>Spritesheet Animation Handler</h2>
             {this.renderDropZone()}
-            {this.props.spriteSheet && this.renderSpriteSheetImage()}
+            {this.props.spriteSheets && this.renderSpriteSheetImage()}
         </div>
     )
 
@@ -44,7 +44,7 @@ class SpritesheetPage extends React.Component {
         <Dropzone onDropAction={this.getSpritesheet}/>
 
     renderSpriteSheetImage = () =>
-        <img src={this.props.spriteSheet} alt="Processed Image"/>
+        <img src={this.props.spriteSheets[0]} alt="Processed Image"/>
 
     onDrop = (acceptedImages) => {
         if (this.imagesValid(acceptedImages)) {
@@ -145,6 +145,6 @@ const style = {
 }
 
 export default connect((state) => ({
-    spriteSheet: state.spritesheetReducer.spriteSheetGenerated,
+    spriteSheets: state.spritesheetReducer.spriteSheetsGenerated,
     isMobile: false
 }), actions)(SpritesheetPage)
