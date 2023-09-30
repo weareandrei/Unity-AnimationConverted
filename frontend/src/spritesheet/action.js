@@ -120,16 +120,6 @@ export const getSpritesheet = (formData) => {
             console.log('\n DATA')
             console.log(data)
             const imagesUrls = [URL.createObjectURL(data)]
-            // const processedFiles = data.body
-            // const imagesUrls = map(processedFiles, (file) => {
-            //     console.log('\n FILE')
-            //     console.log(file)
-            //     console.log('\n BUFFER')
-            //     console.log(file.buffer)
-            //     const blob = new Blob([file.buffer.data], { type: 'image/png' });
-            //     return URL.createObjectURL(blob)
-            // })
-
             dispatch(getSpritesheetSuccess(imagesUrls))
         })
         .catch((error) => {
