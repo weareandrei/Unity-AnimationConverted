@@ -24,6 +24,7 @@
     "psd2png": "^1.2.0",
     "psd2pngl": "^0.1.2",
     "randomstring": "^1.3.0",
-    "sharp": "^0.32.6"
+    "sharp": "^0.32.6",
+    "stream-to-buffer": "^0.1.0"
   }
 }
